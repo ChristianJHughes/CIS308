@@ -1,0 +1,34 @@
+CFLAGS= -fPIC
+
+all: orafn.so
+
+orafn.so: entry_point.o ora_sin.o ora_lpad.o my_IF.o ora_CONCAT.o my_TIME_TO_SEC.o my_REVERSE.o ora_INITCAP.o my_POW.o
+	gcc -g -fPIC -shared -o orafn.so entry_point.o \
+		ora_sin.o ora_lpad.o my_IF.o ora_CONCAT.o my_TIME_TO_SEC.o my_REVERSE.o ora_INITCAP.o my_POW.c -lsqlite3 -lm
+
+entry_point.o: entry_point.c orafn.h
+	gcc -c $(CFLAGS) -o entry_point.o entry_point.c
+
+ora_sin.o: ora_sin.c
+	gcc -c $(CFLAGS) -o ora_sin.o ora_sin.c
+
+ora_lpad.o: ora_lpad.c
+	gcc -c $(CFLAGS) -o ora_lpad.o ora_lpad.c
+
+my_IF.o: my_IF.c
+	gcc -c $(CFLAGS) -o my_IF.o my_IF.c
+
+ora_CONCAT.o: ora_CONCAT.c
+	gcc -c $(CFLAGS) -o ora_CONCAT.o ora_CONCAT.c
+
+my_TIME_TO_SEC.o: my_TIME_TO_SEC.c
+	gcc -c $(CFLAGS) -o my_TIME_TO_SEC.o my_TIME_TO_SEC.c
+
+my_REVERSE.o: my_REVERSE.c
+	gcc -c $(CFLAGS) -o my_REVERSE.o my_REVERSE.c
+
+ora_INITCAP.o: ora_INITCAP.c
+	gcc -c $(CFLAGS) -o ora_INITCAP.o ora_INITCAP.c
+
+my_POW.o: my_POW.c
+	gcc -c $(CFLAGS) -o my_POW.o my_POW.c
